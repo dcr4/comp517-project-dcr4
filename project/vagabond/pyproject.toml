@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "vagabond web browser"
+version = "1.0"
+description = "A web browser for the comp517 project."
+authors = ["Desmond Roberts <dcr4@rice.edu>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.dev.dependencies]
+sphinx = "^7.2.6"
+sphinx-rtd-theme = "^1.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
