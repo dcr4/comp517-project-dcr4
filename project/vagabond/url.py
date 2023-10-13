@@ -45,7 +45,7 @@ class URL:
         sock.connect((self.hostname, 80))
         if self.scheme == "https":
             ctx = ssl.create_default_context()
-            sock = ctx.wrap_socket(s, server_hostname=self.hostname)
+            sock = ctx.wrap_socket(sock, server_hostname=self.hostname)
         req = f"GET {self.path} HTTP/1.0\r\nHost: {self.hostname}\r\n\r\n".encode("utf8")
         sock.send(req)
 
