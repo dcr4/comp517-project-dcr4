@@ -7,7 +7,7 @@ class URL:
 
     def __init__(self, url):
         self.url = url
-        self.scheme = ""
+        self.scheme = "http"
         self.hostname = ""
         self.path = ""
         self.port = 0
@@ -16,7 +16,11 @@ class URL:
         """
         Parses a URL into its various components.
         """
-        self.scheme, url = self.url.split("://", 1)
+        try:
+            self.scheme, url = self.url.split("://", 1)
+        except ValueError:
+            print("No scheme provided, defaulting to https.")
+            url = self.url
         if self.scheme in scheme_2_port:
             self.port = int(scheme_2_port[self.scheme])
         else:
