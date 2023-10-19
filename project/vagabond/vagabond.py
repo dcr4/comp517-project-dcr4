@@ -1,8 +1,10 @@
 import tkinter as tk
 
-from render import HTML_Renderer
+import render
+
 from constants import RWIDTH, RHEIGHT
 from url import URL
+
 
 class Vagabond:
     """
@@ -17,7 +19,7 @@ class Vagabond:
         self.canvas = tk.Canvas(self.window, width=RWIDTH, height=RHEIGHT)
         self.canvas.pack()
         self.input_url = ""
-        self.html_renderer = HTML_Renderer()
+        self.html_renderer = render.HTML_Renderer()
 
     def run(self):
         """
@@ -30,8 +32,8 @@ class Vagabond:
         self.url_lbl = tk.Label(self.window, text="Enter URL:")
         self.url_entry = tk.Entry(self.window, textvariable=self.input_url)  # Link the Entry to the input_url variable
         self.save_btn = tk.Button(self.window, text="Save URL", command=self.save_text)
-        self.load_btn = tk.Button(self.window, text="Load HTML", command = self.load)
-        self.show_btn = tk.Button(self.window, text="Show HTML", command = self.show)
+        self.load_btn = tk.Button(self.window, text="Load HTML", command=self.load)
+        self.show_btn = tk.Button(self.window, text="Show HTML", command=self.show)
         self.body_lbl = tk.Label(self.window, text="")
 
         # Add the button and label to the canvas using create_window
@@ -49,7 +51,6 @@ class Vagabond:
         # self.show_btn.grid(row=3, columnspan=2)
         # self.body_lbl.grid(row=4, column=0, rowspan=10, columnspan=10)
 
-
     def save_text(self):
         """
         Responds to click event on "Save Text" button1.
@@ -64,19 +65,20 @@ class Vagabond:
         Draws a web page to the screen.
         """
         text = self.html_renderer.get_body_text(self.body)
-        display_list = self.html_renderer.layout_text(text)
+        display_list = self.html_renderer.layout_text(text, RWIDTH)
         for x, y, c in display_list:
             self.canvas.create_text(x, y, text=c)
 
         # self.body_lbl.config(text=self.body)
         # self.body_lbl.config(text=text)
-    
+
     def load(self):
         """
         Loads a web page.
         """
         self.url.parse_url()
         self.headers, self.body = self.url.req()
+
 
 """
 Main

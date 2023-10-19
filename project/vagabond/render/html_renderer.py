@@ -1,4 +1,4 @@
-from constants import RWIDTH, RHEIGHT
+
 
 class HTML_Renderer:
 
@@ -9,7 +9,7 @@ class HTML_Renderer:
 
     def get_body_text(self, body):
         """
-        Gets all the text (exludes the tags) of an HTML body.
+        Gets all the text (excludes the tags) of an HTML body.
 
         Returns:
             str: All the text of an HTML body.
@@ -24,10 +24,15 @@ class HTML_Renderer:
             if not in_angle:
                 text += c
         return text
-    
-    def layout_text(self, text):
+
+    def layout_text(self, text, width):
         """
-        Builds a display list where an entry looks like: (x, y, c). 'x' is the x position of the character, 'y' is the y position of the character, and 'c' is the character itself.
+        Builds a display list where an entry looks like: (x, y, c). 'x' is the x position of the character, 'y' is the y
+        position of the character, and 'c' is the character itself.
+
+        Args:
+            text (str): Some text.
+            width (int): The width in which to fit the text.
         
         Returns:
             list: A display list.
@@ -40,9 +45,8 @@ class HTML_Renderer:
         for c in text:
             display_list.append((x, y, c))
             x += x_step
-            if x > RWIDTH - x_step:
+            if x > width - x_step:
                 x = x_step
                 y += y_step
-        
-        return display_list
 
+        return display_list
